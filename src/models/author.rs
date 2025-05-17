@@ -1,0 +1,1 @@
+// create an author struct as a db model
