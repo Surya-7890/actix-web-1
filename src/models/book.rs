@@ -1,1 +1,0 @@
-// create a book struct as a db model
