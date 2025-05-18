@@ -7,6 +7,6 @@ use crate::schema::books;
 pub struct Book {
     pub id: i32,
     pub title: String,
-    pub year: Option<i32>,
-    pub author_id: Option<i32>
+    pub year: i32,
+    pub author_id: i32
 }
