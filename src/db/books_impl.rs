@@ -7,7 +7,7 @@ impl Book {
         diesel::insert_into(books).values(new_book).get_result(conn)
     }
     
-    pub fn add_books(conn: &mut PgConnection, new_books: Vec<&NewBook>) -> Result<Vec<Book>, diesel::result::Error> {
+    pub fn add_books(conn: &mut PgConnection, new_books: Vec<NewBook>) -> Result<Vec<Book>, diesel::result::Error> {
         diesel::insert_into(books).values(new_books).get_results(conn)
     }
 
@@ -25,7 +25,12 @@ impl Book {
         books.filter(title.eq(book_name.to_string())).first::<Book>(conn)
     }
     
-    pub fn get_books_by_author_id(conn: &mut PgConnection, author_id_val: i32) -> Result<Vec<Book>, diesel::result::Error> {
-        books.filter(author_id.eq(author_id_val)).load::<Book>(conn)
+    pub fn get_books_by_author_name(conn: &mut PgConnection, author_val: &str) -> Result<Vec<Book>, diesel::result::Error> {
+        books.filter(author.eq(author_val.to_string())).load::<Book>(conn)
+    }
+
+    pub fn get_book_by_book_id(conn: &mut PgConnection, book_id: i32) -> Result<Book, diesel::result::Error> {
+        books.filter(id.eq(book_id))
+            .first(conn)
     }
 }

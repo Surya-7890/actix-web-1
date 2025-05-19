@@ -1,13 +1,8 @@
-CREATE TABLE authors (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR NOT NULL
-);
-
 CREATE TABLE books (
     id SERIAL PRIMARY KEY,
     title VARCHAR NOT NULL,
     year INT NOT NULL,
-    author_id INT NOT NULL REFERENCES authors(id),
+    author VARCHAR NOT NULL,
     price INT NOT NULL
 );
 

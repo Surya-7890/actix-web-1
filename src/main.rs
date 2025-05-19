@@ -5,7 +5,7 @@ mod models;
 mod schema;
 mod db_conn;
 
-use api::{ user, authors, books, orders };
+use api::{ user, books, orders };
 
 #[get("/")]
 async fn home() -> impl Responder {
@@ -25,15 +25,10 @@ async fn main() -> std::io::Result<()> {
             .service(home)
             .service(
                 web::scope("/user")
-                    .route("/", web::patch().to(user::update_user))
-                    .route("/", web::delete().to(user::delete_user))
+                    .route("/{id}", web::patch().to(user::update_user))
+                    .route("/{id}", web::delete().to(user::delete_user))
                     .route("/login", web::post().to(user::user_login))
                     .route("/signup", web::post().to(user::user_signup))
-            )
-            .service(
-                web::scope("/author")
-                    .route("/add", web::post().to(authors::add_author))
-                    .route("/update", web::patch().to(authors::update_author))
             )
             .service(
                 web::scope("/books")
@@ -42,12 +37,12 @@ async fn main() -> std::io::Result<()> {
                     .route("/add", web::post().to(books::add_book))
                     .route("/add/multiple", web::post().to(books::add_books))
                     .route("/name/{name}", web::get().to(books::get_book_by_name))
-                    .route("/author/{author_id}", web::get().to(books::get_books_by_author_id))
+                    .route("/author/{author_id}", web::get().to(books::get_books_by_author_name))
             )
             .service(
                 web::scope("/orders")
                     .route("/", web::post().to(orders::place_order))
-                    .route("/{user_id}", web::get().to(orders::get_orders_by_user_id))
+                    .route("/{order_id}", web::get().to(orders::get_orders_by_order_id))
             )
     })
     .bind(("127.0.0.1", 8000))?

@@ -9,7 +9,7 @@ pub struct Book {
     pub id: i32,
     pub title: String,
     pub year: i32,
-    pub author_id: i32,
+    pub author: String,
     pub price: i32
 }
 
@@ -18,7 +18,7 @@ pub struct Book {
 pub struct NewBook {
     pub title: String,
     pub year: i32,
-    pub author_id: i32,
+    pub author: String,
     pub price: i32
 }
 
@@ -27,6 +27,6 @@ pub struct NewBook {
 pub struct UpdateBook {
     pub title: Option<String>,
     pub year: Option<i32>,
-    pub author_id: Option<i32>,
+    pub author: Option<String>,
     pub price: Option<i32>
 }

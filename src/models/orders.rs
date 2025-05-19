@@ -17,3 +17,11 @@ pub struct NewOrder {
     pub user_id: i32,
     pub price: i32
 }
+
+#[derive(Insertable, Deserialize, AsChangeset)]
+#[diesel(table_name = orders)]
+pub struct UpdateOrder {
+    pub user_id: Option<i32>,
+    pub price: Option<i32>
+}
+

@@ -1,7 +1,7 @@
 use diesel::PgConnection;
 use diesel::prelude::*;
 
-use crate::models::orders::{NewOrder, Order};
+use crate::models::orders::{NewOrder, Order, UpdateOrder};
 use crate::schema::orders::dsl::*;
 
 impl Order {
@@ -14,5 +14,11 @@ impl Order {
     pub fn get_orders_by_user_id(conn: &mut PgConnection, user_id_val: i32) -> Result<Vec<Order>, diesel::result::Error> {
         orders.filter(user_id.eq(user_id_val))
             .load::<Order>(conn)
+    }
+
+    pub fn update_order_by_order_id(conn: &mut PgConnection, order_id: i32, updated_order: &UpdateOrder) -> Result<Order, diesel::result::Error> {
+        diesel::update(orders.filter(id.eq(order_id)))
+            .set(updated_order)
+            .get_result(conn)
     }
 }

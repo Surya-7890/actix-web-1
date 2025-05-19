@@ -1,13 +1,6 @@
 // @generated automatically by Diesel CLI.
 
 diesel::table! {
-    authors (id) {
-        id -> Int4,
-        name -> Varchar,
-    }
-}
-
-diesel::table! {
     book_orders (order_id, book_id) {
         order_id -> Int4,
         book_id -> Int4,
@@ -20,7 +13,7 @@ diesel::table! {
         id -> Int4,
         title -> Varchar,
         year -> Int4,
-        author_id -> Int4,
+        author -> Varchar,
         price -> Int4,
     }
 }
@@ -43,11 +36,9 @@ diesel::table! {
 
 diesel::joinable!(book_orders -> books (book_id));
 diesel::joinable!(book_orders -> orders (order_id));
-diesel::joinable!(books -> authors (author_id));
 diesel::joinable!(orders -> users (user_id));
 
 diesel::allow_tables_to_appear_in_same_query!(
-    authors,
     book_orders,
     books,
     orders,
