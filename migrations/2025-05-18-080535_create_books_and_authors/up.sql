@@ -24,8 +24,8 @@ CREATE TABLE orders (
 );
 
 CREATE TABLE book_orders (
-    order_id INT NOT NULL REFERENCES orders(id), 
-    book_id INT NOT NULL REFERENCES books(id),
+    order_id INT NOT NULL REFERENCES orders(id) ON DELETE CASCADE, 
+    book_id INT NOT NULL REFERENCES books(id) ON DELETE CASCADE,
     quantity INT NOT NULL,
     PRIMARY KEY (order_id, book_id)
 );

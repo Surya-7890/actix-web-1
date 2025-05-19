@@ -5,7 +5,7 @@ use crate::schema::book_orders;
 #[diesel(belongs_to(crate::models::book_orders::BookOrder))]
 #[diesel(table_name = book_orders)]
 pub struct BookOrder {
-    order_id: i32,
-    book_id: i32,
-    quantity: i32
+    pub order_id: i32,
+    pub book_id: i32,
+    pub quantity: i32
 }
