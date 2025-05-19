@@ -3,6 +3,7 @@ mod api;
 mod db;
 mod models;
 mod schema;
+mod db_conn;
 
 use api::{ user, authors, books, orders };
 
@@ -14,8 +15,13 @@ async fn home() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    dotenvy::dotenv().ok();
+    
+    let conn_pool = db_conn::establish_connection();
+
     HttpServer::new(move || {
         App::new()
+            .app_data(web::Data::new(conn_pool.clone()))
             .service(home)
             .service(
                 web::scope("/user")
