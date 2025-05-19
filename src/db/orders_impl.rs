@@ -11,11 +11,6 @@ impl Order {
             .get_result(conn)
     }
 
-    pub fn get_orders_by_user_id(conn: &mut PgConnection, user_id_val: i32) -> Result<Vec<Order>, diesel::result::Error> {
-        orders.filter(user_id.eq(user_id_val))
-            .load::<Order>(conn)
-    }
-
     pub fn update_order_by_order_id(conn: &mut PgConnection, order_id: i32, updated_order: &UpdateOrder) -> Result<Order, diesel::result::Error> {
         diesel::update(orders.filter(id.eq(order_id)))
             .set(updated_order)

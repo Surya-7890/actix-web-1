@@ -6,7 +6,6 @@ use crate::models::users::{User, NewUser};
 use crate::schema::users::dsl::*;
 
 pub enum UserErrors {
-    UserNotFound,
     IncorrectPassword,
     DatabaseError(diesel::result::Error)
 }
@@ -15,7 +14,6 @@ impl UserErrors {
     pub fn to_string(&self) -> String {
         match self {
             UserErrors::IncorrectPassword => "incorrect password".to_string(),
-            UserErrors::UserNotFound => "user not found".to_string(),
             UserErrors::DatabaseError(err) => err.to_string()
         }
     }
