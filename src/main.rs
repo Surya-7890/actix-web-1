@@ -32,7 +32,7 @@ async fn main() -> std::io::Result<()> {
             .service(
                 web::scope("/books")
                     .route("/", web::get().to(books::get_all_books))
-                    .route("/", web::patch().to(books::update_book_by_book_id))
+                    .route("/{id}", web::patch().to(books::update_book_by_book_id))
                     .route("/add", web::post().to(books::add_book))
                     .route("/add/multiple", web::post().to(books::add_books))
                     .route("/name/{name}", web::get().to(books::get_book_by_name))

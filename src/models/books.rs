@@ -1,7 +1,8 @@
 use diesel::prelude::*;
+use serde::{Deserialize, Serialize};
 use crate::schema::books;
 
-#[derive(Debug, Queryable, Selectable)]
+#[derive(Debug, Queryable, Selectable, Serialize)]
 #[diesel(belongs_to(crate::models::author::Author))]
 #[diesel(table_name = books)]
 pub struct Book {
@@ -12,7 +13,7 @@ pub struct Book {
     pub price: i32
 }
 
-#[derive(Insertable)]
+#[derive(Insertable, Deserialize)]
 #[diesel(table_name = books)]
 pub struct NewBook {
     pub title: String,
@@ -21,7 +22,7 @@ pub struct NewBook {
     pub price: i32
 }
 
-#[derive(AsChangeset)]
+#[derive(AsChangeset, Deserialize)]
 #[diesel(table_name = books)]
 pub struct UpdateBook {
     pub title: Option<String>,

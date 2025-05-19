@@ -273,6 +273,8 @@ dependencies = [
  "actix-web",
  "diesel",
  "dotenvy",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]
