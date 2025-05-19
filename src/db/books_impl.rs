@@ -6,7 +6,7 @@ impl Book {
     pub fn add_book(conn: &mut PgConnection, new_book: &NewBook) -> Result<Book, diesel::result::Error> {
         diesel::insert_into(books).values(new_book).get_result(conn)
     }
-
+    
     pub fn add_books(conn: &mut PgConnection, new_books: Vec<&NewBook>) -> Result<Vec<Book>, diesel::result::Error> {
         diesel::insert_into(books).values(new_books).get_results(conn)
     }
