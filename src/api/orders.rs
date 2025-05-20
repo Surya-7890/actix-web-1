@@ -7,7 +7,7 @@ use crate::models::{ book_orders::BookOrder, orders::{Order, NewOrder}, books::B
 #[derive(Deserialize)]
 pub struct SingleBookOrder {
     pub id: i32,
-    quantity: i32
+    pub quantity: i32
 }
 
 #[derive(Deserialize)]
